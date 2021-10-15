@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,5 @@ Route::get('/', function () {
 });
 
 Route::redirect('/', '/home', 301);
-
-Route::get('/home', 'HomeController@index');
-Route::get('/home/search', 'HomeController@search');
+Route::get('/home', [HomeController::class, 'index']);
+// Route::get('/home/search', [HomeController::class, 'search']);
