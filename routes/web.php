@@ -20,4 +20,5 @@ Route::get('/', function () {
 
 Route::redirect('/', '/home', 301);
 Route::get('/home', [HomeController::class, 'index']);
-// Route::get('/home/search', [HomeController::class, 'search']);
+Route::get('/home/search', [HomeController::class, 'search']);
+Route::get('/detail/{id}', [HomeController::class, 'detail']);

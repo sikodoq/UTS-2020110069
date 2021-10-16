@@ -12,4 +12,17 @@ class HomeController extends Controller
         $result = DB::table('pokemons')->orderBy('id', 'asc')->get();
         return view('Home', ['posts' => $result]);
     }
+
+    public function search()
+    {
+        /* $result = DB::table('pokemons')->where('id', $id)->get();
+        return view('Blog.continueread', ['postid' => $result]); */
+    }
+
+    public function detail($id)
+    {
+        $result = DB::table('pokemons')->where('id', $id)->get();
+        $alldata = DB::table('pokemons')->get();
+        return view('detail', ['id' => $result, 'evos' => $alldata]);
+    }
 }
