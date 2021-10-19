@@ -3,12 +3,26 @@
 @section('container')
     <div class="row">
         <div class="col mb-3">
-            <button class="btn w-100 btn-warning" type="button" id="dropdownMenuButton" aria-haspopup="true"
-                aria-expanded="false">Suprise Me</button>
+            @if (isset($previous))
+                <button class="btn w-100 btn-danger" type="button"
+                    onclick="window.location='{{ url('/detail/' . $previous->id) }}'">#{{ sprintf('%03s', $previous->id) }}
+                    {{ $previous->name }}</button>
+            @elseif (isset($latest))
+                <button class="btn w-100 btn-danger" type="button"
+                    onclick="window.location='{{ url('/detail/' . $latest->id) }}'">#{{ sprintf('%03s', $latest->id) }}
+                    {{ $latest->name }}</button>
+            @endif
         </div>
         <div class="col mb-3">
-            <button class="btn w-100 btn-warning" type="button" id="dropdownMenuButton" aria-haspopup="true"
-                aria-expanded="false">Suprise Me</button>
+            @if (isset($next))
+                <button class="btn w-100 btn-danger" type="button"
+                    onclick="window.location='{{ url('/detail/' . $next->id) }}'">#{{ sprintf('%03s', $next->id) }}
+                    {{ $next->name }}</button>
+            @else
+                <button class="btn w-100 btn-danger" type="button"
+                    onclick="window.location='{{ url('/detail/' . $first->id) }}'">#{{ sprintf('%03s', $first->id) }}
+                    {{ $first->name }}</button>
+            @endif
         </div>
     </div>
     <div class="card shadow mb-3">
