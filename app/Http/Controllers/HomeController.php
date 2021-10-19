@@ -9,15 +9,17 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $result = DB::table('pokemons')->orderBy('id', 'asc')->get();
-        return view('Home', ['posts' => $result]);
+        $pokemons = DB::table('pokemons')->orderBy('id', 'asc')->get();
+        return view('home', ['pokemons' => $pokemons]);
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        /* $result = DB::table('pokemons')->where('id', $id)->get();
-        return view('Blog.continueread', ['postid' => $result]); */
+        $search = $request->search_query;
+        $pokemons = DB::table('pokemons')->where('name', 'like', "%" . $search . "%")->orWhere('id', 'like', "%" . $search . "%")->get();
+        return view('home', ['pokemons' => $pokemons]);
     }
+
 
     public function detail($id)
     {

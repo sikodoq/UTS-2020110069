@@ -11,7 +11,7 @@
                 aria-expanded="false">Suprise Me</button>
         </div>
     </div>
-    <div class="card shadow">
+    <div class="card shadow mb-3">
         @foreach ($id as $item)
             <div class="row justify-content-center">
 
@@ -158,7 +158,7 @@
             </div>
     </div>
     @endforeach
-    <p class="text-center"></p>
+
     <script type="text/javascript">
         $('.progress-bar').each(function() {
             var min = $(this).attr('aria-valuemin');
