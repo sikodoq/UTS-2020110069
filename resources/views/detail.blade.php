@@ -52,9 +52,12 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Height</th>
-                                        <td>({{ $item->height }} m)</td>
+                                        <td>{{ number_format($item->height * 3.28084, 2) }} ft. ({{ $item->height }}
+                                            m)
+                                        </td>
                                         <th scope="row">Weight</th>
-                                        <td>({{ $item->weight }} kg)</td>
+                                        <td>{{ number_format($item->weight * 2.20462, 2) }} lbs. ({{ $item->weight }}
+                                            kg)</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Species</th>
@@ -73,13 +76,18 @@
                             <h4>Stats</h4>
                             <table class="table table-borderless table-sm">
                                 <tbody>
+                                    @php
+                                        $valuemax = 300;
+                                    @endphp
                                     <tr>
                                         <th scope="row" style="width: 20%">HP</th>
                                         <td>
                                             <div class="progress">
                                                 <div class="progress-bar bg-danger" role="progressbar"
-                                                    aria-valuenow="{{ $item->hp }}" aria-valuemin="0"
-                                                    aria-valuemax="500">{{ $item->hp }}</div>
+                                                    style="width: {{ number_format(($item->hp / $valuemax) * 100) }}%"
+                                                    aria-valuenow="{{ number_format(($item->hp / $valuemax) * 100) }}"
+                                                    aria-valuemin="0" aria-valuemax="{{ $valuemax }}">
+                                                    {{ $item->hp }}</div>
                                             </div>
                                         </td>
                                     </tr>
@@ -88,8 +96,9 @@
                                         <td>
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar"
-                                                    style="background-color:orange;" aria-valuenow="{{ $item->attack }}"
-                                                    aria-valuemin="0" aria-valuemax="500">
+                                                    style="background-color:orange; width: {{ number_format(($item->attack / $valuemax) * 100) }}%;"
+                                                    aria-valuenow="{{ number_format(($item->attack / $valuemax) * 100) }}"
+                                                    aria-valuemin="0" aria-valuemax="{{ $valuemax }}">
                                                     {{ $item->attack }}</div>
                                             </div>
                                         </td>
@@ -99,8 +108,9 @@
                                         <td>
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar"
-                                                    style="background-color:yellow;" aria-valuenow="{{ $item->defense }}"
-                                                    aria-valuemin="0" aria-valuemax="500">
+                                                    style="background-color:yellow; width: {{ number_format(($item->defense / $valuemax) * 100) }}%;"
+                                                    aria-valuenow="{{ number_format(($item->defense / $valuemax) * 100) }}"
+                                                    aria-valuemin="0" aria-valuemax="{{ $valuemax }}">
                                                     {{ $item->defense }}</div>
                                             </div>
                                         </td>
@@ -110,9 +120,9 @@
                                         <td>
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar"
-                                                    style="background-color:blue;"
-                                                    aria-valuenow="{{ $item->sp_defense }}" aria-valuemin="0"
-                                                    aria-valuemax="500">
+                                                    style="background-color:blue; width: {{ number_format(($item->sp_defense / $valuemax) * 100) }}%;"
+                                                    aria-valuenow="{{ number_format(($item->sp_defense / $valuemax) * 100) }}"
+                                                    aria-valuemin="0" aria-valuemax="{{ $valuemax }}">
                                                     {{ $item->sp_defense }}</div>
                                             </div>
                                         </td>
@@ -122,9 +132,9 @@
                                         <td>
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar"
-                                                    style="background-color:green;"
-                                                    aria-valuenow="{{ $item->sp_attack }}" aria-valuemin="0"
-                                                    aria-valuemax="500">
+                                                    style="background-color:green; width: {{ number_format(($item->sp_attack / $valuemax) * 100) }}%;"
+                                                    aria-valuenow="{{ number_format(($item->sp_attack / $valuemax) * 100) }}"
+                                                    aria-valuemin="0" aria-valuemax="{{ $valuemax }}">
                                                     {{ $item->sp_attack }}</div>
                                             </div>
                                         </td>
@@ -133,8 +143,10 @@
                                         <th scope="row" style="width: 20%">Speed</th>
                                         <td>
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="290"
-                                                    aria-valuemin="0" aria-valuemax="500">
+                                                <div class="progress-bar" role="progressbar"
+                                                    style="background-color:Fuchsia; width: {{ number_format(($item->speed / $valuemax) * 100) }}%;"
+                                                    aria-valuenow="{{ number_format(($item->speed / $valuemax) * 100) }}"
+                                                    aria-valuemin="0" aria-valuemax="{{ $valuemax }}">
                                                     {{ $item->speed }}</div>
                                             </div>
                                         </td>
@@ -149,11 +161,11 @@
 
             {{-- evolution --}}
             <p class="text-center">Evolution</p>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @foreach (json_decode($item->evolutions) as $evoid)
+            <div class="row m-2 row-cols-xl-4 justify-content-center">
+                @forelse (json_decode($item->evolutions) as $evoid)
                     @foreach ($evos->where('id', $evoid) as $postid)
                         <div class="col mb-5">
-                            <div class="card h-100 shadow">
+                            <div class="card h-100 shadow p-4">
                                 <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
                                     #{{ sprintf('%03s', $postid->id) }}</div>
                                 <a href="{{ url('detail/' . $postid->id) }}">
@@ -168,18 +180,18 @@
                             </div>
                         </div>
                     @endforeach
-                @endforeach
+                @empty
+                    <div class="col mb-5">
+                        <div class="card h-100 shadow">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <p class="fw-bolder">No Evolution for this Pokemon</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
     </div>
     @endforeach
-
-    <script type="text/javascript">
-        $('.progress-bar').each(function() {
-            var min = $(this).attr('aria-valuemin');
-            var max = $(this).attr('aria-valuemax');
-            var now = $(this).attr('aria-valuenow');
-            var siz = (now - min) * 100 / (max - min);
-            $(this).css('width', siz + '%');
-        });
-    </script>
 @endsection
