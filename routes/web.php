@@ -21,4 +21,5 @@ Route::get('/', function () {
 Route::redirect('/', '/home', 301);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/home/search', [HomeController::class, 'search'])->name('search_query');
+Route::get('/home/randomize', [HomeController::class, 'randomize'])->name('home.randomize');
 Route::get('/detail/{id}', [HomeController::class, 'detail']);

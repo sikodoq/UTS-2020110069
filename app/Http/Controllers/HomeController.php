@@ -2,29 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pokemons;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $pokemons = DB::table('pokemons')->orderBy('id', 'asc')->get();
-        return view('home', ['pokemons' => $pokemons]);
+        return view('home', ['pokemons' => Pokemons::all()]);
     }
 
     public function search(Request $request)
     {
         $search = $request->search_query;
-        $pokemons = DB::table('pokemons')->where('name', 'like', "%" . $search . "%")->orWhere('id', 'like', "%" . $search . "%")->get();
+        $pokemons = Pokemons::where('name', 'like', "%" . $search . "%")->orWhere('id', 'like', "%" . $search . "%")->get();
         return view('home', ['pokemons' => $pokemons]);
     }
 
 
     public function detail($id)
     {
-        $result = DB::table('pokemons')->where('id', $id)->get();
-        $alldata = DB::table('pokemons')->get();
-        return view('detail', ['id' => $result, 'evos' => $alldata]);
+        $result = Pokemons::where('id', $id)->get();
+        $evos = Pokemons::all();
+        return view('detail', compact('result', 'evos'));
+    }
+
+    public function randomize()
+    {
+        $pokemons = Pokemons::inRandomOrder()->get();
+        return view('home', ['pokemons' => $pokemons]);
     }
 }

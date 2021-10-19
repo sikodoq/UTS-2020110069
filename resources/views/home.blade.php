@@ -11,8 +11,8 @@
     </form>
     <div class="row">
         <div class="col mb-3">
-            <button class="btn w-100 btn-warning" type="button" id="dropdownMenuButton" aria-haspopup="true"
-                aria-expanded="false">Suprise Me</button>
+            <button class="btn w-100 btn-warning" type="button"
+                onclick="window.location='{{ url('/home/randomize') }}'">Suprise Me</button>
         </div>
         <div class="col mb-3">
             <div class="dropdown">

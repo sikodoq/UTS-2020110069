@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="card shadow mb-3">
-        @foreach ($id as $item)
+        @foreach ($result as $item)
             <div class="row justify-content-center">
 
                 <div class="col my-auto">
