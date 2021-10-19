@@ -28,3 +28,7 @@ Route::get('/home/o-id-asc', [HomeController::class, 'ascid'])->name('home.ascid
 Route::get('/home/o-id-desc', [HomeController::class, 'descid'])->name('home.descid');
 Route::get('/home/o-a-z', [HomeController::class, 'ascname'])->name('home.ascname');
 Route::get('/home/o-z-a', [HomeController::class, 'descname'])->name('home.descname');
+
+Route::fallback(function () {
+    return view('404');
+});
