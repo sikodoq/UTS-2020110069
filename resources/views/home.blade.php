@@ -20,10 +20,11 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Order By
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ url('/home/o-id-asc') }}">Lowest Number</a>
+                    <a class="dropdown-item" href="{{ url('/home/o-id-desc') }}">Highest Number</a>
+                    <a class="dropdown-item" href="{{ url('/home/o-a-z') }}">A-Z</a>
+                    <a class="dropdown-item" href="{{ url('/home/o-z-a') }}">Z-A</a>
                 </div>
             </div>
         </div>

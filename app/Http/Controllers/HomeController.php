@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pokemons;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\DB;
-
 
 class HomeController extends Controller
 {
@@ -32,6 +30,27 @@ class HomeController extends Controller
     public function randomize()
     {
         $pokemons = Pokemons::inRandomOrder()->get();
+        return view('home', ['pokemons' => $pokemons]);
+    }
+
+    public function ascid()
+    {
+        $pokemons = Pokemons::orderBy('id')->get();
+        return view('home', ['pokemons' => $pokemons]);
+    }
+    public function descid()
+    {
+        $pokemons = Pokemons::orderByDesc('id')->get();
+        return view('home', ['pokemons' => $pokemons]);
+    }
+    public function ascname()
+    {
+        $pokemons = Pokemons::orderBy('name')->get();
+        return view('home', ['pokemons' => $pokemons]);
+    }
+    public function descname()
+    {
+        $pokemons = Pokemons::orderByDesc('name')->get();
         return view('home', ['pokemons' => $pokemons]);
     }
 }
