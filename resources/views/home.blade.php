@@ -36,7 +36,7 @@
                     <div class="card h-100 shadow p-3">
                         <!-- Sale badge-->
                         <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                            #{{ sprintf('%03s', $item->id) }}</div>
+                            # {{ sprintf('%03s', $item->id) }}</div>
                         <!-- Product image-->
                         <a href="{{ url('detail/' . $item->id) }}">
                             <img class="card-img-top" src="{{ asset('img/' . $item->image) }}" alt="{{ $item->name }}"

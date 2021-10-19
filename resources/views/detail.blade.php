@@ -5,22 +5,23 @@
         <div class="col mb-3">
             @if (isset($previous))
                 <button class="btn w-100 btn-danger" type="button"
-                    onclick="window.location='{{ url('/detail/' . $previous->id) }}'">#{{ sprintf('%03s', $previous->id) }}
+                    onclick="window.location='{{ url('/detail/' . $previous->id) }}'">#
+                    {{ sprintf('%03s', $previous->id) }}
                     {{ $previous->name }}</button>
             @elseif (isset($latest))
                 <button class="btn w-100 btn-danger" type="button"
-                    onclick="window.location='{{ url('/detail/' . $latest->id) }}'">#{{ sprintf('%03s', $latest->id) }}
+                    onclick="window.location='{{ url('/detail/' . $latest->id) }}'"># {{ sprintf('%03s', $latest->id) }}
                     {{ $latest->name }}</button>
             @endif
         </div>
         <div class="col mb-3">
             @if (isset($next))
                 <button class="btn w-100 btn-danger" type="button"
-                    onclick="window.location='{{ url('/detail/' . $next->id) }}'">#{{ sprintf('%03s', $next->id) }}
+                    onclick="window.location='{{ url('/detail/' . $next->id) }}'"># {{ sprintf('%03s', $next->id) }}
                     {{ $next->name }}</button>
             @else
                 <button class="btn w-100 btn-danger" type="button"
-                    onclick="window.location='{{ url('/detail/' . $first->id) }}'">#{{ sprintf('%03s', $first->id) }}
+                    onclick="window.location='{{ url('/detail/' . $first->id) }}'"># {{ sprintf('%03s', $first->id) }}
                     {{ $first->name }}</button>
             @endif
         </div>
@@ -34,7 +35,7 @@
                 </div>
                 <div class="col mb-5">
                     <ul class="list-group">
-                        <li class="list-group-item border-0">#{{ sprintf('%03s', $item->id) }}</li>
+                        <li class="list-group-item border-0"># {{ sprintf('%03s', $item->id) }}</li>
                         <li class="list-group-item border-0">
                             <h1>{{ $item->name }}</h1>
                         </li>
@@ -167,7 +168,7 @@
                         <div class="col mb-5">
                             <div class="card h-100 shadow p-4">
                                 <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                                    #{{ sprintf('%03s', $postid->id) }}</div>
+                                    # {{ sprintf('%03s', $postid->id) }}</div>
                                 <a href="{{ url('detail/' . $postid->id) }}">
                                     <img class="card-img-top" src="{{ asset('img/' . $postid->image) }}"
                                         alt="{{ $postid->name }}" width="450" height="300" />
